@@ -47,6 +47,8 @@ var Engine = (function(global) {
          */
         update(dt);
         render();
+        /* Call the drawScore function to show player's score in upper right corner.*/
+        drawScore();
 
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
