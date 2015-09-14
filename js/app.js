@@ -1,3 +1,12 @@
+var score =0;
+
+//Create function to draw score on the board
+function drawScore() {
+    ctx.font = "22px Arial";
+    ctx.fillstyle = 'black';
+    ctx.fillText("Score: "+score, 410, 85);
+}
+
 // Enemies our player must avoid
 var Enemy = function(x,y) {
     this.x = x; 
@@ -67,6 +76,7 @@ var player = new Player();
 
 // Check for player-bug collisions. A collision will be detected when the player
 // and bug overlap by half a column width or half a row height.
+// Set score to zero because collision means game over.
 Player.prototype.collisionCheck = function() {
     for (var i = 0; i < allEnemiesLength; i++) {
         if (this.x < (allEnemies[i].x + 50) &&
@@ -74,6 +84,7 @@ Player.prototype.collisionCheck = function() {
             this.y < (allEnemies[i].y + 40) &&
             (40 + this.y) > allEnemies[i].y) {
             this.resetGame();
+            score = 0;
         }
     }
 };
@@ -83,9 +94,11 @@ Player.prototype.collisionCheck = function() {
 // Columns (left/right movement) are predefined in the engine as 101, rows (up/down movement) at 83.
 // Move up by subtracting 83 from current position on the y axis, down by adding 83 to current position on y axis. 
 // Move left by subtracting 101 from current position on x axis, right by adding 101.
+// When the player is directed up into the water, add 1 to the score and start player at beginning to try again.
 Player.prototype.handleInput = function(keyInput) {
     if(keyInput === 'up') {
         if(this.y < 83) {
+            score ++;
             this.resetGame();
         }
         else {
