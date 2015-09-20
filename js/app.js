@@ -9,7 +9,7 @@ function drawScore() {
 
 // Enemies our player must avoid
 var Enemy = function(x,y) {
-    this.x = x; 
+    this.x = x;
     this.y = y;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
@@ -23,11 +23,11 @@ var Enemy = function(x,y) {
 // all computers.
 Enemy.prototype.update = function(dt) {
 // If the enemy's x-coordinate puts it off the board to the right,
-// meaning it has completed its trek from left to right, reset the 
+// meaning it has completed its trek from left to right, reset the
 // x-coordinate to a negative number to restart the enemy across the board from
-// left to right again, ensuring an endless parade of enemies. 
+// left to right again, ensuring an endless parade of enemies.
     this.speed = Math.random() * 350 + 1;
-    this.x += this.speed * dt; 
+    this.x += this.speed * dt;
     if(this.x > 505) {
         this.x = Math.random() - 600;
     }
@@ -92,7 +92,7 @@ Player.prototype.collisionCheck = function() {
 // When a key is pressed move player in the desired direction if it is within the board's boundaries.
 // If moving the player in desired direction would cause the player to leave the board then do nothing.
 // Columns (left/right movement) are predefined in the engine as 101, rows (up/down movement) at 83.
-// Move up by subtracting 83 from current position on the y axis, down by adding 83 to current position on y axis. 
+// Move up by subtracting 83 from current position on the y axis, down by adding 83 to current position on y axis.
 // Move left by subtracting 101 from current position on x axis, right by adding 101.
 // When the player is directed up into the water, add 1 to the score and start player at beginning to try again.
 Player.prototype.handleInput = function(keyInput) {
@@ -102,7 +102,7 @@ Player.prototype.handleInput = function(keyInput) {
             this.resetGame();
         }
         else {
-           this.y -= 83; 
+           this.y -= 83;
         }
     }
     else if(keyInput === 'down') {
@@ -110,7 +110,7 @@ Player.prototype.handleInput = function(keyInput) {
             return null;
         }
         else {
-           this.y += 83; 
+           this.y += 83;
         }
     }
     else if(keyInput === 'left') {
@@ -118,7 +118,7 @@ Player.prototype.handleInput = function(keyInput) {
             return null;
         }
         else {
-           this.x -= 101; 
+           this.x -= 101;
         }
     }
     else if(keyInput === 'right') {
